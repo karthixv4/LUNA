@@ -24,9 +24,9 @@ public class RecipeController {
         return  recipeService.getAllRecipe();
     }
 
-    @PostMapping(value = "/saveRecipe", consumes = { "multipart/form-data","application/json" })
-    public Recipe saveRecipe(@RequestParam("recipe") String recipe,@RequestParam("file") MultipartFile file) throws IOException {
-        System.out.println("RECIPE: "+recipe);
+    @PostMapping("/saveRecipe")
+    public Recipe saveRecipe(@RequestParam("recipe") String recipe,@RequestParam(name = "file",required = false) MultipartFile file) throws IOException {
+        System.out.println("HEY: "+file);
         Recipe recipeNew = objectMapper.readValue(recipe,Recipe.class);
         if(file != null ){
             recipeNew.setImage(recipeService.uploadFile(file)) ;

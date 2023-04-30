@@ -1,6 +1,8 @@
 package Luna.start.Recipe.Model;
 
+import Luna.start.Cuisine.Model.Cuisine;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -20,19 +22,19 @@ public class Recipe {
     private String description;
 
     @Field
-    private Map<String,String> ingredient;
+    private List<Ingredient> ingredient;
 
     @Field
-    private Map<String,String> cookingSteps;
+    private String cookingSteps;
 
-    @Field
-    private String cuisine;
+    @DBRef
+    private Cuisine cuisine;
 
     @Field
     private String mealType;
 
     @Field
-    private List<String> dietRestriction;
+    private String dietRestriction;
 
     @Field
     private String image;
@@ -62,27 +64,28 @@ public class Recipe {
         this.description = description;
     }
 
-    public Map<String, String> getIngredient() {
+
+    public List<Ingredient> getIngredient() {
         return ingredient;
     }
 
-    public void setIngredient(Map<String, String> ingredient) {
+    public void setIngredient(List<Ingredient> ingredient) {
         this.ingredient = ingredient;
     }
 
-    public Map<String, String> getCookingSteps() {
+    public String getCookingSteps() {
         return cookingSteps;
     }
 
-    public void setCookingSteps(Map<String, String> cookingSteps) {
+    public void setCookingSteps(String cookingSteps) {
         this.cookingSteps = cookingSteps;
     }
 
-    public String getCuisine() {
+    public Cuisine getCuisine() {
         return cuisine;
     }
 
-    public void setCuisine(String cuisine) {
+    public void setCuisine(Cuisine cuisine) {
         this.cuisine = cuisine;
     }
 
@@ -94,11 +97,11 @@ public class Recipe {
         this.mealType = mealType;
     }
 
-    public List<String> getDietRestriction() {
+    public String getDietRestriction() {
         return dietRestriction;
     }
 
-    public void setDietRestriction(List<String> dietRestriction) {
+    public void setDietRestriction(String dietRestriction) {
         this.dietRestriction = dietRestriction;
     }
 
