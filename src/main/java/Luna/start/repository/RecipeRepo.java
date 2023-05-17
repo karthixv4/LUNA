@@ -1,6 +1,7 @@
-package Luna.start.Recipe.Repository;
+package Luna.start.repository;
 
-import Luna.start.Recipe.Model.Recipe;
+import Luna.start.model.Recipe;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

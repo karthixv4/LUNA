@@ -1,4 +1,4 @@
-package Luna.start.Recipe.Model;
+package Luna.start.model;
 
 public class Ingredient {
 

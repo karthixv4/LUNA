@@ -1,11 +1,13 @@
-package Luna.start.Recipe.Model;
+package Luna.start.model;
 
-import Luna.start.Cuisine.Model.Cuisine;
+import Luna.start.model.Cuisine;
+import Luna.start.model.Ingredient;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +41,38 @@ public class Recipe {
     @Field
     private String image;
 
+    @Field
+    private User userDetails;
+
+    @Field
+    private ArrayList<User> likes;
+
+    @DBRef
+    private ArrayList<Comments> comments;
+
+    public ArrayList<Comments> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<Comments> comments) {
+        this.comments = comments;
+    }
+
+    public ArrayList<User> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(ArrayList<User> likes) {
+        this.likes = likes;
+    }
+
+    public User getUserDetails() {
+        return userDetails;
+    }
+
+    public void setUserDetails(User userDetails) {
+        this.userDetails = userDetails;
+    }
 
     public String getId() {
         return id;

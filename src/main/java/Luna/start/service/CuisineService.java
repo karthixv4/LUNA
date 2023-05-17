@@ -1,7 +1,7 @@
-package Luna.start.Recipe.Service;
+package Luna.start.service;
 
-import Luna.start.Recipe.Model.Recipe;
-import Luna.start.Recipe.Repository.RecipeRepo;
+import Luna.start.model.Cuisine;
+import Luna.start.repository.CuisineRepo;
 import com.cloudinary.Cloudinary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,28 +14,13 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class RecipeService {
+public class CuisineService {
+
     @Autowired
-    private RecipeRepo recipeRepo;
+    private CuisineRepo cuisineRepo;
 
     @Autowired
     private Cloudinary cloudinary;
-    public Recipe addRecipe(Recipe recipe){
-        System.out.println("RECIPE: "+recipe);
-        return recipeRepo.save(recipe);
-    }
-
-    public Optional<Recipe> getRecipeById(String id){
-        return recipeRepo.findById(id);
-    }
-
-    public List<Recipe> getAllRecipe(){
-        return recipeRepo.findAll();
-    }
-
-    public void deleteRecipe(String id){
-        recipeRepo.deleteById(id);
-    }
 
     public String uploadFile(MultipartFile multipartFile) throws IOException {
         return cloudinary.uploader()
@@ -45,5 +30,19 @@ public class RecipeService {
                 .toString();
     }
 
+    public Cuisine addCuisine(Cuisine cuisine){
+        return cuisineRepo.save(cuisine);
+    }
 
+    public void deleteCuisine(String id){
+        cuisineRepo.deleteById(id);
+    }
+
+    public Optional<Cuisine> getCuisineById(String id){
+        return cuisineRepo.findById(id);
+    }
+
+    public List<Cuisine> getAllCuisine(){
+        return cuisineRepo.findAll();
+    }
 }

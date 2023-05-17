@@ -1,4 +1,4 @@
-package Luna.start.Recipe.Config;
+package Luna.start.config;
 import com.cloudinary.Cloudinary;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

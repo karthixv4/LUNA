@@ -1,6 +1,7 @@
-package Luna.start.Recipe.Controller;
-import Luna.start.Recipe.Model.Recipe;
-import Luna.start.Recipe.Service.RecipeService;
+package Luna.start.controller;
+import Luna.start.model.Recipe;
+import Luna.start.model.User;
+import Luna.start.service.RecipeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,6 @@ public class RecipeController {
 
     @PostMapping("/saveRecipe")
     public Recipe saveRecipe(@RequestParam("recipe") String recipe,@RequestParam(name = "file",required = false) MultipartFile file) throws IOException {
-        System.out.println("HEY: "+file);
         Recipe recipeNew = objectMapper.readValue(recipe,Recipe.class);
         if(file != null ){
             recipeNew.setImage(recipeService.uploadFile(file)) ;
@@ -54,5 +54,16 @@ public class RecipeController {
     public void deleteRecipeById(@RequestParam(name="Id",required = true) String Id){
         recipeService.deleteRecipe(Id);
     }
+
+    @PutMapping("/addLike")
+    public Recipe addLike(@RequestParam("id")String id,@RequestBody User user){
+        return recipeService.addLikes(user,id);
+    }
+
+    @PutMapping("/removeLike")
+    public Recipe removeLike(@RequestParam("id")String id,@RequestBody User user){
+        return recipeService.removeLike(id,user);
+    }
+
 
 }

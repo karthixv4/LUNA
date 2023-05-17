@@ -1,7 +1,7 @@
-package Luna.start.Cuisine.Controller;
+package Luna.start.controller;
 
-import Luna.start.Cuisine.Model.Cuisine;
-import Luna.start.Cuisine.Service.CuisineService;
+import Luna.start.model.Cuisine;
+import Luna.start.service.CuisineService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
