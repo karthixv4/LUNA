@@ -18,7 +18,6 @@ public class CommentsController {
 
     @PostMapping("/addComment")
     public Comments saveComment(@RequestBody Comments comments) {
-        System.out.println("COMMENT:"+comments);
         Comments savedComment = commentsService.saveComment(comments);
         recipeService.addComments(comments);
         return savedComment;

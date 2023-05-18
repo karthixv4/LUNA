@@ -1,6 +1,7 @@
 package Luna.start.service;
 
 import Luna.start.model.Comments;
+import Luna.start.model.Cuisine;
 import Luna.start.model.Recipe;
 import Luna.start.model.User;
 import Luna.start.repository.RecipeRepo;
@@ -109,5 +110,28 @@ public class RecipeService {
         }
         return new Recipe();
     }
+
+    public List<Recipe> findAllRecipeByUser(User user){
+        List<Recipe> allRecipe =  recipeRepo.findAll();
+        List<Recipe> sortedRecipe = new ArrayList<>();
+        for(Recipe recipe : allRecipe){
+            if(recipe.getUserDetails().getEmail().equals(user.getEmail())){
+                sortedRecipe.add(recipe);
+            }
+        }
+        return sortedRecipe;
+    }
+
+    public List<Recipe> findRecipeByCuisine(Cuisine cuisine){
+        List<Recipe> allRecipe =  recipeRepo.findAll();
+        List<Recipe> sortedRecipe = new ArrayList<>();
+        for(Recipe recipe : allRecipe){
+            if(recipe.getCuisine().getId().equals(cuisine.getId())){
+                sortedRecipe.add(recipe);
+            }
+        }
+        return sortedRecipe;
+    }
+
 
 }

@@ -1,8 +1,14 @@
 package Luna.start.model;
 
-public class User {
-    private String name;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+@Document(collection = "lunausers")
+public class User {
+    @Field
+    private String name;
+    @Id
     private String email;
 
     @Override

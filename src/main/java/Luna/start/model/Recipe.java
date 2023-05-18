@@ -41,7 +41,7 @@ public class Recipe {
     @Field
     private String image;
 
-    @Field
+    @DBRef
     private User userDetails;
 
     @Field
