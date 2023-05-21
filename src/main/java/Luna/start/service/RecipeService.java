@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.*;
 
 @Service
@@ -44,7 +45,7 @@ public class RecipeService {
                 .toString();
     }
 
-    public void addComments(Comments comments){
+    public Recipe addComments(Comments comments){
         String recipeId = comments.getRecipeId();
          Optional<Recipe> recipe = recipeRepo.findById(recipeId);
          if(recipe.isPresent()) {
@@ -57,9 +58,9 @@ public class RecipeService {
                  recipeComments.add(comments);
                  recipe.get().setComments(recipeComments);
              }
-             recipeRepo.save(recipe.get());
+            return recipeRepo.save(recipe.get());
          }
-
+        return new Recipe();
     }
 
     public void removeComment(Comments comment){
@@ -91,19 +92,16 @@ public class RecipeService {
         return new Recipe();
     }
 
-    public Recipe removeLike(String id, User userLiked){
+    public Recipe removeLike(String id, User userLiked) {
         Optional<Recipe> recipe = recipeRepo.findById(id);
-        if(recipe.isPresent()){
-            if(recipe.get().getLikes()!= null){
-               ArrayList<User> likedUsers = recipe.get().getLikes();
-                for (Iterator<User> iterator = likedUsers.iterator();
-                     iterator.hasNext();) {
-                    User user = iterator.next();
-                    if (user.getEmail().equals(userLiked.getEmail())) {
-                        iterator.remove();
-                        break;
-                    }
-                }
+        if (recipe.isPresent()) {
+            ArrayList<User> likedUsers = recipe.get().getLikes();
+            if (likedUsers != null) {
+                System.out.println("likedUsersBef: "+likedUsers);
+                System.out.println("EMAIL : "+userLiked.getEmail());
+
+                likedUsers.removeIf(user -> user.getEmail().equals(userLiked.getEmail()));
+                System.out.println("likedUsersAfter: "+likedUsers);
                 recipe.get().setLikes(likedUsers);
                 return recipeRepo.save(recipe.get());
             }
@@ -122,11 +120,11 @@ public class RecipeService {
         return sortedRecipe;
     }
 
-    public List<Recipe> findRecipeByCuisine(Cuisine cuisine){
+    public List<Recipe> findRecipeByCuisine(String id){
         List<Recipe> allRecipe =  recipeRepo.findAll();
         List<Recipe> sortedRecipe = new ArrayList<>();
         for(Recipe recipe : allRecipe){
-            if(recipe.getCuisine().getId().equals(cuisine.getId())){
+            if(recipe.getCuisine().getId().equals(id)){
                 sortedRecipe.add(recipe);
             }
         }

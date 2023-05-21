@@ -1,6 +1,8 @@
 package Luna.start.controller;
+import Luna.start.model.Cuisine;
 import Luna.start.model.Recipe;
 import Luna.start.model.User;
+import Luna.start.service.CuisineService;
 import Luna.start.service.RecipeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ import java.util.Optional;
 public class RecipeController {
     @Autowired
     private RecipeService recipeService;
+
+    @Autowired
+    private CuisineService cuisineService;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -63,6 +68,11 @@ public class RecipeController {
     @PutMapping("/removeLike")
     public Recipe removeLike(@RequestParam("id")String id,@RequestBody User user){
         return recipeService.removeLike(id,user);
+    }
+
+    @GetMapping("/getByCuisine")
+    public List<Recipe> getRecipeByCuisine(@RequestParam("id") String id){
+        return recipeService.findRecipeByCuisine(id);
     }
 
 

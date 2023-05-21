@@ -1,6 +1,7 @@
 package Luna.start.controller;
 
 import Luna.start.model.Comments;
+import Luna.start.model.Recipe;
 import Luna.start.service.CommentsService;
 import Luna.start.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,9 @@ public class CommentsController {
     private RecipeService recipeService;
 
     @PostMapping("/addComment")
-    public Comments saveComment(@RequestBody Comments comments) {
-        Comments savedComment = commentsService.saveComment(comments);
-        recipeService.addComments(comments);
-        return savedComment;
+    public Recipe saveComment(@RequestBody Comments comments) {
+        commentsService.saveComment(comments);
+        return recipeService.addComments(comments);
     }
 
     @DeleteMapping("/deleteComment")

@@ -20,12 +20,21 @@ public class CuisineController {
 
     @Autowired
     private ObjectMapper objectMapper;
-
+    /**
+     * Retrieves all available Cuisine objects.
+     *
+     * @return A List containing all available Cuisine objects.
+     */
     @GetMapping("/getAll")
     public List<Cuisine> getAllCuisines(){
         return  cuisineService.getAllCuisine();
     }
-
+    /**
+     * Retrieves a Cuisine object by its ID.
+     *
+     * @param id The ID of the Cuisine to retrieve.
+     * @return An Optional containing the Cuisine object if found, or an empty Optional if not found.
+     */
     @GetMapping("/getById")
     public Optional<Cuisine> getCuisineById(String id){
         return cuisineService.getCuisineById(id);

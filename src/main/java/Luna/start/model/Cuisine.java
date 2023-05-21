@@ -1,8 +1,12 @@
 package Luna.start.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.util.List;
 
 @Document(collection = "lunacuisines")
 public class Cuisine {
@@ -14,6 +18,7 @@ public class Cuisine {
 
     @Field
     private String imageUrl;
+
 
     public String getId() {
         return id;

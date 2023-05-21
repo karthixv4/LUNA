@@ -13,8 +13,8 @@ public class CommentsService {
     @Autowired
     private CommentsRepo commentsRepo;
 
-    public Comments saveComment(Comments comment){
-        return commentsRepo.save(comment);
+    public void saveComment(Comments comment){
+        commentsRepo.save(comment);
     }
 
     public Optional<Comments> getComments(String id){
