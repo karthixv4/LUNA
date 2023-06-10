@@ -7,6 +7,8 @@ import Luna.start.model.User;
 import Luna.start.repository.RecipeRepo;
 import com.cloudinary.Cloudinary;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +24,7 @@ public class RecipeService {
     @Autowired
     private Cloudinary cloudinary;
     public Recipe addRecipe(Recipe recipe){
+        System.out.println("SERVICE: "+recipe);
         return recipeRepo.save(recipe);
     }
 
@@ -129,6 +132,12 @@ public class RecipeService {
             }
         }
         return sortedRecipe;
+    }
+
+    public List<Recipe> getTop3RecipesByLikes() {
+        Sort sortByLikesDesc = Sort.by(Sort.Direction.DESC, "likes.size");
+        PageRequest pageRequest = PageRequest.of(0, 3, sortByLikesDesc);
+        return recipeRepo.findAll(pageRequest).getContent();
     }
 
 

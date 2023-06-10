@@ -50,6 +50,24 @@ public class Recipe {
     @DBRef
     private ArrayList<Comments> comments;
 
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", ingredient=" + ingredient +
+                ", cookingSteps='" + cookingSteps + '\'' +
+                ", cuisine=" + cuisine +
+                ", mealType='" + mealType + '\'' +
+                ", dietRestriction='" + dietRestriction + '\'' +
+                ", image='" + image + '\'' +
+                ", userDetails=" + userDetails +
+                ", likes=" + likes +
+                ", comments=" + comments +
+                '}';
+    }
+
     public ArrayList<Comments> getComments() {
         return comments;
     }

@@ -14,8 +14,12 @@ public class UserService {
     @Autowired
     private UserRepo userRepo;
 
-    public User addUser(User user){
-        return userRepo.save(user);
+    public User addUser(User user) {
+        // Check if the user already exists based on email
+        Optional<User> existingUser = userRepo.findById(user.getEmail());
+        // User already exists, return the existing user
+        // User does not exist, add the new user to the database
+        return existingUser.orElseGet(() -> userRepo.save(user));
     }
 
     public Optional<User> getUser(String id){

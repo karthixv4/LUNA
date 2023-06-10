@@ -33,6 +33,7 @@ public class RecipeController {
     @PostMapping("/saveRecipe")
     public Recipe saveRecipe(@RequestParam("recipe") String recipe,@RequestParam(name = "file",required = false) MultipartFile file) throws IOException {
         Recipe recipeNew = objectMapper.readValue(recipe,Recipe.class);
+        System.out.println("RECIPE:"+recipeNew.toString());
         if(file != null ){
             recipeNew.setImage(recipeService.uploadFile(file)) ;
     }
@@ -73,6 +74,11 @@ public class RecipeController {
     @GetMapping("/getByCuisine")
     public List<Recipe> getRecipeByCuisine(@RequestParam("id") String id){
         return recipeService.findRecipeByCuisine(id);
+    }
+
+    @GetMapping("/getTopRecipes")
+    public List<Recipe> getTopRecipe(){
+        return recipeService.getTop3RecipesByLikes();
     }
 
 
