@@ -2,7 +2,6 @@
 # Build stage
 #
 FROM openjdk:18-jdk AS build
-COPY . .
 RUN mvn clean package -DskipTests
 
 #
